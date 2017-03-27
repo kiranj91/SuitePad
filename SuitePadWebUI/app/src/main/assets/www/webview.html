@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Suitepad Menu UI Webview Application - HTML for WebView</title>
+</head>
+<body>
+<table>
+  <thead>
+    <tr>
+      <th>type</th>
+      <th>name</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody id="target">
+  </tbody>
+</table>
+
+  <script>
+    var target = document.getElementById('target');
+    fetch('http://someremoteurl.com/sample.json', {
+      method: 'get'
+    })
+    .then(function(response) {
+      window.JSInterface.displayResponse(response.toString());
+      console.log("response first is..", response);
+      return response.json();
+    })
+    .then(function(jsonResponse) {
+      window.JSInterface.displayResponse(jsonResponse.toString());
+      console.log("response second is..", jsonResponse);
+      jsonResponse.forEach(function(item) {
+        var row = document.createElement('tr');
+        ['type', 'name', 'price'].forEach(function(field) {
+          let column = document.createElement('td');
+          let columnText = document.createTextNode(item[field]);
+          column.appendChild(columnText);
+          row.appendChild(column);
+        });
+        target.appendChild(row);
+      });
+    })
+    .catch(function(error) {
+      window.JSInterface.displayResponse(error.toString());
+      console.log("error is...", error);
+    });
+  </script>
+</body>
+</html>
