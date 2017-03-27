@@ -1,0 +1,4 @@
+Sometimes we might get requests from Unknown Certificate, its not recommended to continue with the request since it may not be trustable.
+To avoid that, we can use TrustManager Interface and can make the system to trust and accept a specific set of CAs. 
+We can use onReceivedSslError method to catch the requests where we encounter SSL requests which are not from a known CA, and handle them 
+or continue with the request. 
